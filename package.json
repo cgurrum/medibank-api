@@ -1,0 +1,14 @@
+{
+    "name": "medibank-api",
+    "version": "1.0.0",
+    "author": "Chandra",
+    "license": "ISC",
+    "scripts": {
+        "start": "docker-compose up --build"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "node-cache": "^5.1.2",
+        "node-fetch": "^2.6.1"
+    }
+}

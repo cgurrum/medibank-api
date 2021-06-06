@@ -1,0 +1,29 @@
+version: '3'
+services:
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - frontend
+        ports:
+            - '4000:4000'
+
+    frontend:
+        image: 'medibankdigital/hacker-card-frontend:latest'
+        depends_on:
+            - backend
+        expose:
+            - '3001'
+
+    backend:
+        build:
+            context: .
+        environment:
+            - PORT=3000
+            - ARTICLE_CACHE_SECONDS=3600
+            - HACKER_NEWS_URL=https://hn.algolia.com/api/v1/search?query=medicine&tags=story
+            - UNSPLASH_URL=https://api.unsplash.com/photos/random?query=medicine&count=1
+            - UNSPLASH_ACCESS_KEY=P8eUACBJhR9M1IsR_PN02CaVNQMtwDmRmQc1Q8pbq5M
+        expose:
+            - '3000'
